@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+body{ 
+    font-family: 'Poppins', sans-serif; 
+    background-color: #1a202c; 
+    color: white; 
+}
+
+.screen, .config{ 
+    display: none; 
+    opacity: 0; 
+    transition: opacity 0.5s ease-in-out; 
+}
+        
+.screen.active, .config.config-active{ 
+    display: block; 
+    opacity: 1; 
+}
+        
+.fade-in{ 
+    animation: fadeIn 0.5s forwards; 
+}
+        
+@keyframes fadeIn{ 
+    from{ 
+        opacity: 0; 
+        transform: translateY(10px); 
+    } 
+    to{ 
+        opacity: 1; 
+        transform: translateY(0); 
+    } 
+}
+        
+.card-select:hover{ 
+    transform: scale(1.02); 
+    border-color: #6366f1; 
+}
+
+.no-spinner::-webkit-outer-spin-button,
+.no-spinner::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.no-spinner[type=number] {
+  -moz-appearance: textfield;
+}

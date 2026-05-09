@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Impostor</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/dist/output.css">
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-4">
+    <div class="flex-1 flex items-center justify-center w-full">
+        <div class="w-full max-w-md bg-gray-800 rounded-xl shadow-2xl overflow-hidden border border-gray-700">
+            
+            <div id="back-button-div" class="bg-indigo-600 p-4 text-center">
+                <button id="back-button" onclick="game.configGame('0')" class="hidden ">
+                    <i class="fas fa-arrow-left mr-2 fa-2x"></i>
+                </button>
+    
+                <div id="impostor-title">
+                    <h1 class="text-2xl font-bold tracking-wider"><i class="fas fa-user-secret mr-2"></i>EL IMPOSTOR</h1>
+                </div>
+            </div>
+    
+            <div id="screen-index" class="screen active p-6">
+                <button onclick="game.configGame('screen-partida-rapida')" class=" my-2 w-full bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 rounded shadow transition transform active:scale-95">
+                    PARTIDA RAPIDA
+                </button>
+    
+                <button onclick="game.configGame('1')" class=" my-2 w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded shadow transition transform active:scale-95">
+                    CONFIGURAR PARTIDA
+                </button>
+            </div>
+    
+            <div id="screen-partida-rapida" class="screen p-6">
+                <div class="flex items-center justify-center mb-4">
+                    <p class="text-gray-400 mt-4 mb-2 p-4 text-sm">Cantidad de Jugadores: </p>
+    
+                    <div class="flex flex-col">
+                        <button id="increment-players" class="">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="4" stroke="white" class="size-8 w-full">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+                            </svg>
+                        </button>
+        
+                        <input
+                        id="total-players"
+                        type="number"
+                        min="0"
+                        max="59"
+                        value="3"
+                        class="no-spinner w-20 bg-zinc-800 p-2 rounded text-center text-2xl outline-none font-bold"
+                        >
+        
+                        <button id="decrement-players" class="">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="4" stroke="white" class="size-8 w-full">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                            </svg>
+        
+                        </button>
+                    </div>
+                </div>
+    
+                <div class="flex items-center justify-center">
+                    <p class="text-gray-400 mt-4 mb-2 p-4 text-sm">Categoria: </p>
+                    <select class="select-categorias w-9/10 p-2 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:border-indigo-500">
+                        <option value="Random">RANDOM</option>
+                    </select>
+                </div>
+    
+                <button onclick="game.prepareGame(true)" class=" my-3 w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded shadow transition transform active:scale-95">
+                    CONFIRMAR
+                </button>  
+            </div>
+            
+            <div id="screen-config" class="screen p-6">
+                <h2 class="text-center text-xl font-bold tracking-wider">CONFIGURANDO PARTIDA...</h2>
+                
+                <!-- hidden opacity-0 transition-opacity duration-500 ease-in-out -->
+                <div id="1" class="config">
+                    <p class="text-gray-400 mt-4 mb-2 text-sm">Agrega entre 3 y 10 jugadores para comenzar.</p>
+                    
+                    <div class="flex gap-2 mb-4">
+                        <input type="text" id="input-player" class="w-full p-3 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:border-indigo-500" placeholder="Nombre del jugador" onkeypress="handleEnter(event)">
+                        <button onclick="game.addPlayer()" class=" bg-indigo-500 hover:bg-indigo-600 text-white p-3 rounded transition"><i class="fas fa-plus"></i></button>
+                    </div>
+        
+                    <ul id="list-players" class="space-y-2 max-h-48 overflow-y-auto">
+                    </ul>
+        
+                    <button onclick="game.configGame('2')" class=" my-3 w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded shadow transition transform active:scale-95">
+                        CONFIRMAR
+                    </button>           
+                </div>
+    
+                <div id="2" class="config">
+                    <p class="text-gray-400 mt-4 mb-2 text-sm">Elige una categoria</p>
+                    <select class="select-categorias w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:border-indigo-500">
+                        <option value="Random">RANDOM</option>
+                    </select>
+                    <button onclick="game.configGame('3')" class=" my-3 w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded shadow transition transform active:scale-95">
+                        CONFIRMAR
+                    </button>  
+                </div>
+    
+                <div id="3" class="config">
+                    <p class="text-center text-gray-400 mt-4 mb-2 text-sm">Configure el tiempo a jugar</p>
+                    <div class="my-4 flex items-center justify-center gap-2 text-white">
+                        <div class="flex flex-col">
+                            <button id="increment-minutes" class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="4" stroke="white" class="size-8 w-full">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+                                </svg>
+                            </button>
+    
+                            <input
+                            id="minutes"
+                            type="number"
+                            min="0"
+                            max="59"
+                            value="2"
+                            class="no-spinner w-20 bg-zinc-800 p-2 rounded text-center text-2xl outline-none font-bold"
+                            >
+        
+                            <button id="decrement-minutes" class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="4" stroke="white" class="size-8 w-full">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                </svg>
+    
+                            </button>
+                        </div>
+    
+                        <span class="text-3xl font-bold">:</span>
+    
+                        <div class="flex flex-col">
+                            <button id="increment-seconds" class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="4" stroke="white" class="size-8 w-full">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+                                </svg>
+                            </button>
+    
+                            <input
+                            id="seconds"
+                            type="number"
+                            min="0"
+                            max="59"
+                            value="30"
+                            class="no-spinner w-20 bg-zinc-800 p-2 rounded text-center text-2xl outline-none font-bold"
+                            >
+        
+                            <button id="decrement-seconds" class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="4" stroke="white" class="size-8 w-full">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                </svg>
+    
+                            </button>
+                        </div>
+                        
+                    </div>
+    
+                    <div class="flex gap-2">
+                        <button onclick="game.configGame('5')" class=" my-3 w-full bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 rounded shadow transition transform active:scale-95">
+                            JUGAR SIN RELOJ
+                        </button>  
+    
+                        <button onclick="game.configGame('4')" class=" my-3 w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded shadow transition transform active:scale-95">
+                            CONFIRMAR
+                        </button>                     
+                    </div>
+                </div>
+            </div>
+    
+    
+            <div id="screen-pass" class="screen p-6 text-center">
+                <div class="mb-6">
+                    <i class="fas fa-mobile-alt text-6xl text-indigo-400 animate-bounce"></i>
+                </div>
+                <h2 class="text-xl font-bold mb-2">Pasa el dispositivo a:</h2>
+                <h3 id="pass-player-name" class="text-3xl text-yellow-400 font-bold mb-6">Jugador</h3>
+                <p class="text-gray-400 text-sm mb-6">Asegúrate de que nadie más esté mirando.</p>
+                <button onclick="game.revealRole()" class=" w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded">
+                    VER MI ROL
+                </button>
+            </div>
+    
+            <div id="screen-role" class="screen p-6 text-center">
+                <div id="role-content">
+                    </div>
+                <button onclick="game.nextTurn()" class=" mt-8 w-full bg-green-600 hover:bg-green-500 text-white font-bold py-3 rounded">
+                    ENTENDIDO, SIGUIENTE
+                </button>
+            </div>
+    
+            <div id="screen-round" class="screen p-6">
+                <div class="text-center mb-6">
+                    <h2 id="timer-title" class="text-lg text-gray-400">Tiempo Restante</h2>
+                    <div id="timer" class="text-5xl font-mono text-red-400 font-bold my-2">03:00</div>
+                    <p class="text-xs text-gray-500">Debatan y den pistas sobre la palabra secreta.</p>
+                </div>
+    
+                <h3 id="jugadores-title" class="text-sm font-bold text-gray-300 mb-2 uppercase tracking-wide">Jugadores:</h3>
+                <div id="round-players-list" class="grid grid-cols-2 gap-2 mb-6">
+                </div>
+    
+                <div class="flex gap-2">
+                    <button onclick="game.toggleTimer()" id="btn-timer" class=" flex-1 bg-yellow-600 hover:bg-yellow-700 text-white py-2 rounded">
+                        <i class="fas fa-pause mr-1"></i> Pausar
+                    </button>
+                    <button onclick="game.startVoting()" id="btn-voto" class=" flex-1 bg-red-600 hover:bg-red-700 text-white py-2 rounded">
+                        <i class="fas fa-gavel mr-1"></i> Votar
+                    </button>
+                </div>
+            </div>
+    
+            <div id="screen-voting" class="screen p-6">
+                <h2 class="text-center text-xl font-bold mb-4 text-red-400">¿Quién es el Impostor?</h2>
+                <p class="text-center text-sm text-gray-400 mb-6">Toca sobre el nombre del jugador para acusarlo.</p>
+                
+                <div id="voting-list" class="space-y-2">
+                    </div>
+            </div>
+    
+            <div id="screen-result" class="screen p-6 text-center">
+                <div id="result-icon" class="text-6xl mb-4"></div>
+                <h2 id="result-title" class="text-3xl font-bold mb-2">Título</h2>
+                <p id="result-message" class="text-gray-300 mb-6 text-lg">Mensaje</p>
+                
+                <div class="bg-gray-700 p-4 rounded mb-6">
+                    <p class="text-xs text-gray-400 uppercase">La palabra secreta era</p>
+                    <p id="reveal-word" class="text-2xl font-bold text-indigo-400">PALABRA</p>
+                </div>
+    
+                <button onclick="game.resetGame()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded">
+                    JUGAR DE NUEVO
+                </button>
+            </div>
+    
+        </div>
+    </div>
+
+
+    <footer>    
+        <p class="my-10">Mini-Proyecto realizado por 
+            <a href="https://github.com/lucas99morel" class="text-indigo-400">Liquiii</a>
+        </p>
+    </footer>
+    <script src="/src/js/app.js"></script>
+</body>
+
+
