@@ -14,7 +14,7 @@
         <div class="w-full max-w-md bg-gray-800 rounded-xl shadow-2xl overflow-hidden border border-gray-700">
             
             <div id="back-button-div" class="bg-indigo-600 p-4 text-center">
-                <button id="back-button" onclick="game.configGame('0')" class="hidden ">
+                <button id="back-button" onclick="game.configGame('0')" class="hidden cursor-pointer">
                     <i class="fas fa-arrow-left mr-2 fa-2x"></i>
                 </button>
     
@@ -24,12 +24,16 @@
             </div>
     
             <div id="screen-index" class="screen active p-6">
-                <button onclick="game.configGame('screen-partida-rapida')" class=" my-2 w-full bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 rounded shadow transition transform active:scale-95">
+                <button onclick="game.configGame('screen-partida-rapida')" class="cursor-pointer my-2 w-full bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 rounded shadow transition transform active:scale-95">
                     PARTIDA RAPIDA
                 </button>
     
-                <button onclick="game.configGame('1')" class=" my-2 w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded shadow transition transform active:scale-95">
+                <button onclick="game.configGame('1')" class="cursor-pointer my-2 w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded shadow transition transform active:scale-95">
                     CONFIGURAR PARTIDA
+                </button>
+
+                <button onclick="game.configGame('screen-categorias')" class="cursor-pointer my-2 w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 rounded shadow transition transform active:scale-95">
+                    AGREGAR CATEGORIAS
                 </button>
             </div>
     
@@ -38,7 +42,7 @@
                     <p class="text-gray-400 mt-4 mb-2 p-4 text-sm">Cantidad de Jugadores: </p>
     
                     <div class="flex flex-col">
-                        <button id="increment-players" class="">
+                        <button id="increment-players" class="cursor-pointer">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="4" stroke="white" class="size-8 w-full">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
                             </svg>
@@ -53,7 +57,7 @@
                         class="no-spinner w-20 bg-zinc-800 p-2 rounded text-center text-2xl outline-none font-bold"
                         >
         
-                        <button id="decrement-players" class="">
+                        <button id="decrement-players" class="cursor-pointer">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="4" stroke="white" class="size-8 w-full">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                             </svg>
@@ -69,7 +73,7 @@
                     </select>
                 </div>
     
-                <button onclick="game.prepareGame(true)" class=" my-3 w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded shadow transition transform active:scale-95">
+                <button onclick="game.prepareGame(true)" class="cursor-pointer my-3 w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded shadow transition transform active:scale-95">
                     CONFIRMAR
                 </button>  
             </div>
@@ -83,13 +87,13 @@
                     
                     <div class="flex gap-2 mb-4">
                         <input type="text" id="input-player" class="w-full p-3 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:border-indigo-500" placeholder="Nombre del jugador" onkeypress="handleEnter(event)">
-                        <button onclick="game.addPlayer()" class=" bg-indigo-500 hover:bg-indigo-600 text-white p-3 rounded transition"><i class="fas fa-plus"></i></button>
+                        <button onclick="game.addPlayer()" class="cursor-pointer bg-indigo-500 hover:bg-indigo-600 text-white p-3 rounded transition"><i class="fas fa-plus"></i></button>
                     </div>
         
                     <ul id="list-players" class="space-y-2 max-h-48 overflow-y-auto">
                     </ul>
         
-                    <button onclick="game.configGame('2')" class=" my-3 w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded shadow transition transform active:scale-95">
+                    <button onclick="game.configGame('2')" class="cursor-pointer my-3 w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded shadow transition transform active:scale-95">
                         CONFIRMAR
                     </button>           
                 </div>
@@ -99,7 +103,7 @@
                     <select class="select-categorias w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:border-indigo-500">
                         <option value="Random">RANDOM</option>
                     </select>
-                    <button onclick="game.configGame('3')" class=" my-3 w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded shadow transition transform active:scale-95">
+                    <button onclick="game.configGame('3')" class="cursor-pointer my-3 w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded shadow transition transform active:scale-95">
                         CONFIRMAR
                     </button>  
                 </div>
@@ -108,7 +112,7 @@
                     <p class="text-center text-gray-400 mt-4 mb-2 text-sm">Configure el tiempo a jugar</p>
                     <div class="my-4 flex items-center justify-center gap-2 text-white">
                         <div class="flex flex-col">
-                            <button id="increment-minutes" class="">
+                            <button id="increment-minutes" class="cursor-pointer">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="4" stroke="white" class="size-8 w-full">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
                                 </svg>
@@ -123,7 +127,7 @@
                             class="no-spinner w-20 bg-zinc-800 p-2 rounded text-center text-2xl outline-none font-bold"
                             >
         
-                            <button id="decrement-minutes" class="">
+                            <button id="decrement-minutes" class="cursor-pointer">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="4" stroke="white" class="size-8 w-full">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                                 </svg>
@@ -134,7 +138,7 @@
                         <span class="text-3xl font-bold">:</span>
     
                         <div class="flex flex-col">
-                            <button id="increment-seconds" class="">
+                            <button id="increment-seconds" class="cursor-pointer">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="4" stroke="white" class="size-8 w-full">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
                                 </svg>
@@ -149,7 +153,7 @@
                             class="no-spinner w-20 bg-zinc-800 p-2 rounded text-center text-2xl outline-none font-bold"
                             >
         
-                            <button id="decrement-seconds" class="">
+                            <button id="decrement-seconds" class="cursor-pointer">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="4" stroke="white" class="size-8 w-full">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                                 </svg>
@@ -160,17 +164,32 @@
                     </div>
     
                     <div class="flex gap-2">
-                        <button onclick="game.configGame('5')" class=" my-3 w-full bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 rounded shadow transition transform active:scale-95">
+                        <button onclick="game.configGame('5')" class="cursor-pointer my-3 w-full bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 rounded shadow transition transform active:scale-95">
                             JUGAR SIN RELOJ
                         </button>  
     
-                        <button onclick="game.configGame('4')" class=" my-3 w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded shadow transition transform active:scale-95">
+                        <button onclick="game.configGame('4')" class="cursor-pointer my-3 w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded shadow transition transform active:scale-95">
                             CONFIRMAR
                         </button>                     
                     </div>
                 </div>
             </div>
-    
+
+            <div id="screen-categorias" class="screen p-6">
+                <p class="text-gray-400 mb-4 text-sm text-center">Agregá, editá o eliminá categorías y palabras.</p>
+
+                <div class="flex gap-2 mb-4">
+                    <input type="text" id="input-nueva-categoria" class="w-full p-3 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:border-indigo-500" placeholder="Nueva categoría">
+                    <button id="btn-add-categoria" class="cursor-pointer bg-indigo-500 hover:bg-indigo-600 text-white p-3 rounded transition"><i class="fas fa-plus"></i></button>
+                </div>
+
+                <div id="categorias-list" class="max-h-80 overflow-y-auto mb-4">
+                </div>
+
+                <button id="btn-reset-categorias" class="cursor-pointer w-full bg-gray-600 hover:bg-gray-700 text-white text-sm py-2 rounded">
+                    <i class="fas fa-undo mr-1"></i> Restaurar categorías originales
+                </button>
+            </div>
     
             <div id="screen-pass" class="screen p-6 text-center">
                 <div class="mb-6">
@@ -179,7 +198,7 @@
                 <h2 class="text-xl font-bold mb-2">Pasa el dispositivo a:</h2>
                 <h3 id="pass-player-name" class="text-3xl text-yellow-400 font-bold mb-6">Jugador</h3>
                 <p class="text-gray-400 text-sm mb-6">Asegúrate de que nadie más esté mirando.</p>
-                <button onclick="game.revealRole()" class=" w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded">
+                <button onclick="game.revealRole()" class="cursor-pointer w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded">
                     VER MI ROL
                 </button>
             </div>
@@ -187,7 +206,7 @@
             <div id="screen-role" class="screen p-6 text-center">
                 <div id="role-content">
                     </div>
-                <button onclick="game.nextTurn()" class=" mt-8 w-full bg-green-600 hover:bg-green-500 text-white font-bold py-3 rounded">
+                <button onclick="game.nextTurn()" class="cursor-pointer mt-8 w-full bg-green-600 hover:bg-green-500 text-white font-bold py-3 rounded">
                     ENTENDIDO, SIGUIENTE
                 </button>
             </div>
@@ -204,10 +223,10 @@
                 </div>
     
                 <div class="flex gap-2">
-                    <button onclick="game.toggleTimer()" id="btn-timer" class=" flex-1 bg-yellow-600 hover:bg-yellow-700 text-white py-2 rounded">
+                    <button onclick="game.toggleTimer()" id="btn-timer" class="cursor-pointer flex-1 bg-yellow-600 hover:bg-yellow-700 text-white py-2 rounded">
                         <i class="fas fa-pause mr-1"></i> Pausar
                     </button>
-                    <button onclick="game.startVoting()" id="btn-voto" class=" flex-1 bg-red-600 hover:bg-red-700 text-white py-2 rounded">
+                    <button onclick="game.startVoting()" id="btn-voto" class="cursor-pointer flex-1 bg-red-600 hover:bg-red-700 text-white py-2 rounded">
                         <i class="fas fa-gavel mr-1"></i> Votar
                     </button>
                 </div>
@@ -231,7 +250,7 @@
                     <p id="reveal-word" class="text-2xl font-bold text-indigo-400">PALABRA</p>
                 </div>
     
-                <button onclick="game.resetGame()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded">
+                <button onclick="game.resetGame()" class="cursor-pointer w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded">
                     JUGAR DE NUEVO
                 </button>
             </div>
@@ -249,3 +268,4 @@
 </body>
 
 
+</html>
